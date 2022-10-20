@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userRoute = require('./api/Routes/user');
 const orderRoute = require('./api/Routes/order');
-const uploadRoute = require('./api/Routes/upload');
-const xlstojson = require('./api/Routes/exceltojson');
+// const uploadRoute = require('./api/Routes/upload');
+// const xlstojson = require('./api/Routes/exceltojson');
 const driverRoute = require('./api/Routes/driver');
 
 
@@ -28,8 +28,8 @@ app.use('/book',orderRoute);
 app.use('/user',userRoute);
 app.use('/add_driver',driverRoute);
 
-app.use('/upload',uploadRoute);
-app.use('/filejson',xlstojson)
+// app.use('/upload',uploadRoute);
+// app.use('/filejson',xlstojson)
 
 
 app.use((req, res, next) =>{
