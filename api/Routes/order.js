@@ -57,7 +57,7 @@ router.post('/citytoairport',(req, res, next)=>{
         pickupTime: req.body.pickupTime,
         carType: req.body.carType
        })
-       
+    
        
        order.save()
        .then(result=>{
@@ -70,16 +70,17 @@ router.post('/citytoairport',(req, res, next)=>{
             form: {
               'module': 'TRANS_SMS',
               'apikey': '9f9e7def-e06b-11eb-8089-0200cd936042',
-              'to': 91+req.body.mobile,
+              'to': req.body.mobile,
               'from': 'VTRVLZ',
-              'msg': 'Dear {#var#},Thank you for choosing Venus Travelz, Your Booking ID {#var#} is confirmed, Driver will contact you before a hour of your trip. Dated {#Var#}, From {#var#} to {#var#}.For more query contact support at +91 9538434747.'
+              'msg': `Dear ${req.body.customerName},Thank you for choosing Venus Travelz, Your Booking ID {#var#} is confirmed, Driver will contact you before a hour of your trip. Dated ${req.body.pickupDate}, From ${req.body.pickupAddress} to ${req.body.dropoffAddress}.For more query contact support at +91 9538434747.`
             }
           }
           request(options, function (error, response) {
             if (error) throw new Error(error);
             console.log(response.body);
           });
-          var watiMobile = 91+req.body.mobile;
+          var watiMobile = req.body.mobile;
+          var customername = req.body.customerName;
           const url = `https://app-server.wati.io/api/v1/sendTemplateMessage?whatsappNumber=${watiMobile}`;
           const options1 = {
             method: 'POST',
